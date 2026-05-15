@@ -81,10 +81,11 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(2.6rem, 7vw, 6.2rem);
-      letter-spacing: 0.08em;
-      line-height: 0.95;
+      font-size: clamp(2.4rem, 5.2vw, 4.9rem);
+      letter-spacing: 0.055em;
+      line-height: 1.02;
       font-weight: 900;
+      white-space: nowrap;
     }
     .mirror-l {
       display: inline-block;
@@ -302,6 +303,10 @@
         grid-template-columns: 1fr;
         text-align: center;
       }
+      h1 {
+        white-space: normal;
+        font-size: clamp(2.4rem, 12vw, 4rem);
+      }
       .hero-logo {
         max-width: 260px;
         margin: 0 auto;
@@ -322,7 +327,7 @@
       <img class="hero-logo" src="anthrologos.png" alt="ANTHROLOGOS workshop logo: mechanism vs illusion" />
       <div class="hero-copy">
         <div class="badge">NeurIPS 2026 Workshop Proposal · One Day Workshop · Atlanta</div>
-        <h1>ANTHRO<span class="mirror-l">L</span>OGOS</h1>
+          <h1>ANTHRO<span class="mirror-l">L</span>OGOS</h1>
         <div class="subtitle">To Be or Not to Be Anthropomorphic:<br />Mechanism vs. Illusion in AI</div>
         <p class="tagline">
           A workshop on when human-centered concepts such as intent, agency, deception, personality, and consciousness are scientifically meaningful — and when they become misleading projections.
