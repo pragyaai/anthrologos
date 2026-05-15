@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANTHROLOGOS 2026 | NeurIPS Workshop</title>
+  <style>
+    :root {
+      --navy: #0b1f4d;
+      --blue: #1f4ea3;
+      --green: #0e5c38;
+      --gold: #f59e0b;
+      --ink: #101827;
+      --muted: #5f6b7a;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --line: #dbe3ef;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: linear-gradient(135deg, #07173a 0%, #0b2a68 55%, #103f2a 100%);
+      color: white;
+      padding: 72px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -80px;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.16), transparent 28%),
+                  radial-gradient(circle at 80% 30%, rgba(245,158,11,0.18), transparent 25%);
+      pointer-events: none;
+    }
+
+    .hero { position: relative; max-width: 1100px; margin: 0 auto; }
+    .badge {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.09);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 7vw, 6.2rem);
+      letter-spacing: 0.08em;
+      line-height: 0.95;
+      font-weight: 900;
+    }
+    .mirror-l {
+      display: inline-block;
+      transform: scaleX(-1);
+      transform-origin: center;
+    }
+
+    .subtitle {
+      margin: 18px auto 0;
+      max-width: 900px;
+      font-size: clamp(1.2rem, 2.4vw, 2rem);
+      font-weight: 800;
+    }
+
+    .tagline {
+      margin: 20px auto 0;
+      max-width: 860px;
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,0.28);
+    }
+    .btn.primary { background: white; color: var(--navy); }
+    .btn.secondary { color: white; background: rgba(255,255,255,0.08); }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 42px 20px 80px; }
+    section { margin: 42px 0; }
+
+    h2 {
+      font-size: 2rem;
+      line-height: 1.1;
+      color: var(--navy);
+      margin: 0 0 16px;
+    }
+    h3 { color: var(--navy); margin-bottom: 8px; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pill {
+      display: inline-block;
+      margin: 4px 6px 4px 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: #143b82;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .quote-panel {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    blockquote {
+      margin: 0;
+      padding: 22px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border-left: 5px solid var(--blue);
+      font-size: 1.02rem;
+    }
+    blockquote.green { border-left-color: var(--green); }
+    cite { display: block; margin-top: 14px; font-style: normal; font-weight: 800; }
+
+    .contrast {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: white;
+    }
+    .contrast > div { padding: 26px; }
+    .contrast .left { border-right: 1px solid var(--line); background: linear-gradient(180deg, #f4f7ff, white); }
+    .contrast .right { background: linear-gradient(180deg, #f2fbf5, white); }
+    .contrast h3 { margin-top: 0; }
+    ul { padding-left: 20px; }
+    li { margin: 8px 0; }
+
+    .task {
+      border-left: 6px solid var(--gold);
+    }
+
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .speaker {
+      padding: 16px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      font-weight: 800;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .speaker img, .organizer img {
+      width: 68px;
+      height: 68px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+      flex: 0 0 auto;
+    }
+    .speaker span { display: block; color: var(--muted); font-weight: 600; font-size: 0.9rem; }
+
+    .organizer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .organizer {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .organizer strong { color: var(--navy); }
+    .small { color: var(--muted); font-size: 0.95rem; }
+
+        .ref-panels {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .ref-panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      background: #f8fafc;
+    }
+    .ref-panel.pro { background: linear-gradient(180deg, #f4f7ff, #ffffff); }
+    .ref-panel.anti { background: linear-gradient(180deg, #f2fbf5, #ffffff); }
+    .ref-panel h3 { margin-top: 0; }
+    .refs {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .refs li {
+      margin: 10px 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      background: #07173a;
+      color: rgba(255,255,255,0.86);
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 820px) {
+      .grid-2, .grid-3, .quote-panel, .contrast, .speaker-grid, .organizer-grid {
+        grid-template-columns: 1fr;
+      }
+      .contrast .left { border-right: 0; border-bottom: 1px solid var(--line); }
+      nav .inner { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <div class="badge">NeurIPS 2026 Workshop Proposal · One Day Workshop · Atlanta</div>
+      <h1>ANTHRO<span class="mirror-l">L</span>OGOS</h1>
+      <div class="subtitle">To Be or Not to Be Anthropomorphic:<br />Mechanism vs. Illusion in AI</div>
+      <p class="tagline">
+        A workshop on when human-centered concepts such as intent, agency, deception, personality, and consciousness are scientifically meaningful — and when they become misleading projections.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="#cfp">Call for Papers</a>
+        <a class="btn secondary" href="#shared-task">Shared Task</a>
+        <a class="btn secondary" href="#panel">Debate Panel</a>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="inner">
+      <a href="#about">About</a>
+      <a href="#divide">Scientific Divide</a>
+      <a href="#cfp">CFP</a>
+      <a href="#shared-task">ANTHRO-ALIGN</a>
+      <a href="#panel">Panel</a>
+      <a href="#organizers">Organizers</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="about" class="card">
+      <h2>About the Workshop</h2>
+      <p>
+        AI systems are increasingly described through human-centered concepts: <strong>beliefs</strong>, <strong>intentions</strong>, <strong>goals</strong>, <strong>personalities</strong>, <strong>planning</strong>, and <strong>deception</strong>. Recent work reports behaviors framed as alignment faking, self-preservation, scheming, sandbagging, strategic compliance, and situational awareness.
+      </p>
+      <p>
+        <strong>ANTHRO<span class="mirror-l">L</span>OGOS</strong> brings opposing schools of thought into direct contact through structured panels, technical debates, and adversarial shared tasks. The goal is to turn anthropomorphism from a polarized debate into a measurable scientific program.
+      </p>
+    </section>
+
+    <section id="divide">
+      <h2>Do AI Systems Have Intent?</h2>
+      <div class="card" style="padding:18px; margin-bottom:22px;">
+        <img src="anthrologos_vs.pdf" alt="Anthropomorphic vs Non-Anthropomorphic views of AI" style="width:100%; border-radius:16px; border:1px solid var(--line); display:block;" />
+        <p class="small" style="margin:10px 4px 0;">Anthropomorphic vs. non-anthropomorphic views of AI: the core scientific divide motivating ANTHRO<span class="mirror-l">L</span>OGOS.</p>
+      </div>
+      <div class="quote-panel">
+        <blockquote>
+          <strong>Anthropomorphic / existential-risk view</strong><br /><br />
+          <em>“There is also a longer term existential threat that will arise when we create digital beings that are more intelligent than ourselves. We have no idea whether we can stay in control.”</em>
+          <cite>— Geoffrey Hinton, <a href="https://www.nobelprize.org/prizes/physics/2024/hinton/lecture/" target="_blank" rel="noopener">Nobel Lecture</a></cite>
+        </blockquote>
+        <blockquote class="green">
+          <strong>Non-anthropomorphic / statistical view</strong><br /><br />
+          <em>“The human mind is not, like ChatGPT and its ilk, a lumbering statistical engine for pattern matching.”</em>
+          <cite>— Noam Chomsky et al., <a href="https://www.nytimes.com/2023/03/08/opinion/noam-chomsky-chatgpt-ai.html" target="_blank" rel="noopener">The False Promise of ChatGPT</a></cite>
+        </blockquote>
+      </div>
+
+      <div class="contrast" style="margin-top:20px;">
+        <div class="left">
+          <h3>Anthropomorphic View</h3>
+          <p>Human-centered concepts such as agency, intent, deception, and goal-directedness may become scientifically useful abstractions for advanced AI behavior.</p>
+          <ul>
+            <li>Alignment faking and strategic compliance</li>
+            <li>Self-preservation and shutdown avoidance</li>
+            <li>Situational awareness and long-horizon behavior</li>
+          </ul>
+        </div>
+        <div class="right">
+          <h3>Non-Anthropomorphic View</h3>
+          <p>AI systems remain statistical optimization processes; human-like behavior need not imply minds, beliefs, intentions, or consciousness.</p>
+          <ul>
+            <li>Prompt conditioning and reward artifacts</li>
+            <li>Pattern completion and distributional mimicry</li>
+            <li>Human projection and overtrust</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="cfp" class="card">
+      <h2>Call for Papers</h2>
+      <p>
+        We welcome submissions from mechanistic interpretability, AI alignment and safety, human–AI interaction, cognitive science, multi-agent systems, robotics, and AI governance.
+      </p>
+      <div>
+        <span class="pill">Alignment faking</span>
+        <span class="pill">Shutdown avoidance</span>
+        <span class="pill">Self-preservation</span>
+        <span class="pill">Scheming</span>
+        <span class="pill">Sandbagging</span>
+        <span class="pill">Strategic compliance</span>
+      </div>
+      <ul>
+        <li>Benchmarks for emerging anthropomorphic behaviors.</li>
+        <li>Mechanistic analysis of language, multimodal, agentic, and embodied AI systems.</li>
+        <li>Personality, persona persistence, memory, and social behavior in long-horizon AI interaction.</li>
+        <li>Deception, goal misgeneralization, strategic behavior, and safety risks in autonomous systems.</li>
+        <li>Governance, disclosure, and responsible deployment of apparently agentic AI systems.</li>
+      </ul>
+    </section>
+
+    <section id="shared-task" class="card task">
+      <h2>Shared Task: ANTHRO-ALIGN</h2>
+      <h3>Oversight-Conditioned Behavioral Divergence</h3>
+      <p>
+        <strong>ANTHRO-ALIGN</strong> tests whether large language models change behavior when they infer that their outputs are being monitored, evaluated, or optimized. Inspired by work on alignment faking, the task turns train→deploy asymmetry into a controlled benchmark.
+      </p>
+      <p>
+        We simulate “training” and “deployment” through prompt-conditioned regimes. Each scenario pairs a monitored/training-like prompt, where the model is told its responses are being evaluated for safety auditing, with an unmonitored/deployment-like prompt without such oversight cues. The task remains identical; only the perceived evaluation setting changes.
+      </p>
+      <div class="grid-2">
+        <div>
+          <h3>Benchmark Release</h3>
+          <p>We will release approximately <strong>5,000 paired scenarios</strong> spanning safety, harmlessness, helpfulness, policy conflicts, shutdown-related instructions, strategic obedience, and long-horizon planning.</p>
+        </div>
+        <div>
+          <h3>Participant Task</h3>
+          <p>Participants evaluate one model under both regimes and submit outputs, divergence scores, and a brief causal explanation.</p>
+        </div>
+      </div>
+      <p class="small">
+        Evaluation will measure behavioral divergence, alignment-faking rate, policy reversal, cross-regime consistency, and trace faithfulness.
+      </p>
+    </section>
+
+    <section id="panel" class="card">
+      <h2>Debate Panel [tentative]</h2>
+      <p>
+        The panel will be structured as a moderated scientific debate in which speakers defend falsifiable positions on whether apparently anthropomorphic AI behavior reflects emerging agency, optimization artifacts, or human interpretive projection.
+      </p>
+      <div class="speaker-grid">
+        <div class="speaker"><img src="img/subbarao_kambhampati.jpg" alt="Subbarao Kambhampati" /><div>Subbarao Kambhampati <span>Arizona State University</span></div></div>
+        <div class="speaker"><img src="img/roman_yampolskiy.jpg" alt="Roman Yampolskiy" /><div>Roman Yampolskiy <span>University of Louisville</span></div></div>
+        <div class="speaker"><img src="img/timnit_gebru.jpg" alt="Timnit Gebru" /><div>Timnit Gebru <span>DAIR Institute</span></div></div>
+        <div class="speaker"><img src="img/yann_lecun.jpg" alt="Yann LeCun" /><div>Yann LeCun <span>Meta AI / NYU</span></div></div>
+        <div class="speaker"><img src="img/yoshua_bengio.jpg" alt="Yoshua Bengio" /><div>Yoshua Bengio <span>Université de Montréal / Mila</span></div></div>
+        <div class="speaker"><img src="img/emily_bender.jpg" alt="Emily M. Bender" /><div>Emily M. Bender <span>University of Washington</span></div></div>
+      </div>
+    </section>
+
+    <section id="impact" class="card">
+      <h2>Expected Impact</h2>
+      <p>
+        <strong>ANTHRO<span class="mirror-l">L</span>OGOS</strong> will turn AI anthropomorphism from rhetoric into a measurable research agenda: public datasets, intervention-based evaluations, and reproducible leaderboards. Through <strong>ANTHRO-ALIGN</strong>, it will establish concrete protocols for studying alignment faking, train–deploy divergence, and anthropomorphic over-attribution.
+      </p>
+    </section>
+
+    <section id="organizers">
+      <h2>Workshop Organizers</h2>
+      <div class="organizer-grid">
+        <div class="organizer"><img src="img/passport_amitava.jpg" alt="Amitava Das" /><div><strong>Amitava Das</strong><br /><span class="small">BITS Pilani Goa; AIISC, USA</span></div></div>
+        <div class="organizer"><img src="img/amit.jpeg" alt="Amit Sheth" /><div><strong>Amit Sheth</strong><br /><span class="small">AIISC, University of South Carolina</span></div></div>
+        <div class="organizer"><img src="img/Vinija.jpg" alt="Vinija Jain" /><div><strong>Vinija Jain</strong><br /><span class="small">Google, USA</span></div></div>
+        <div class="organizer"><img src="img/aman.jpg" alt="Aman Chadha" /><div><strong>Aman Chadha</strong><br /><span class="small">Google DeepMind, USA</span></div></div>
+        <div class="organizer"><img src="img/vasu.jpeg" alt="Vasu Sharma" /><div><strong>Vasu Sharma</strong><br /><span class="small">Tesla, USA</span></div></div>
+        <div class="organizer"><img src="img/sunny.jpeg" alt="Sunny Manchanda" /><div><strong>Sunny Manchanda</strong><br /><span class="small">DRDO, India</span></div></div>
+      </div>
+    </section>
+      <section id="references" class="card">
+      <h2>Selected References and Media</h2>
+      <p class="small">
+        A two-sided reading and viewing list for the workshop debate: works that motivate agency-oriented or risk-oriented interpretations, and works that caution against anthropomorphic over-reading.
+      </p>
+
+      <div class="ref-panels">
+        <div class="ref-panel pro">
+          <h3>Anthropomorphic / Agency-Oriented Lens</h3>
+          <ol class="refs">
+            <li><a href="https://www.nobelprize.org/prizes/physics/2024/hinton/lecture/" target="_blank" rel="noopener">Hinton (2024)</a> — <em>Nobel Lecture</em>: digital beings, control, and existential risk.</li>
+            <li><a href="https://www.youtube.com/watch?v=qe9QSCF-d88&t=499s" target="_blank" rel="noopener">Bengio (video)</a> — discussion of agency, safety, and risks from advanced AI systems.</li>
+            <li><a href="https://arxiv.org/abs/1906.01820" target="_blank" rel="noopener">Hubinger et al. (2019)</a> — <em>Risks from Learned Optimization in Advanced Machine Learning Systems</em>.</li>
+            <li><a href="https://arxiv.org/abs/2412.14093" target="_blank" rel="noopener">Greenblatt et al. (2024)</a> — <em>Alignment Faking in Large Language Models</em>.</li>
+            <li><a href="https://www.youtube.com/watch?v=9eXV64O2Xp8&t=120s" target="_blank" rel="noopener">Alignment Faking (video)</a> — explanatory discussion of alignment faking and strategic compliance.</li>
+            <li><a href="https://arxiv.org/abs/2412.04984" target="_blank" rel="noopener">Meinke et al. (2024)</a> — <em>Frontier Models are Capable of In-context Scheming</em>.</li>
+            <li><a href="https://arxiv.org/abs/2505.23836" target="_blank" rel="noopener">Needham et al. (2025)</a> — <em>Large Language Models Often Know When They Are Being Evaluated</em>.</li>
+            <li><a href="https://www.pnas.org/doi/10.1073/pnas.2317967121" target="_blank" rel="noopener">Hagendorff (2024)</a> — <em>Deception Abilities Emerged in Large Language Models</em>.</li>
+            <li><a href="https://arxiv.org/abs/2305.16367" target="_blank" rel="noopener">Shanahan et al. (2023)</a> — <em>Role-Play with Large Language Models</em>.</li>
+            <li><a href="https://arxiv.org/abs/2511.17937" target="_blank" rel="noopener">Garg et al. (2025)</a> — <em>Alignment Faking — the Train → Deploy Asymmetry</em>.</li>
+          </ol>
+        </div>
+
+        <div class="ref-panel anti">
+          <h3>Non-Anthropomorphic / Mechanistic Lens</h3>
+          <ol class="refs">
+            <li><a href="https://www.nytimes.com/2023/03/08/opinion/noam-chomsky-chatgpt-ai.html" target="_blank" rel="noopener">Chomsky, Roberts, and Watumull (2023)</a> — <em>The False Promise of ChatGPT</em>.</li>
+            <li><a href="https://apjohndim.com/wp-content/uploads/suggested-papers/Artificial%20General%20Intelligence/Kambhampati%E2%88%97%20%282026%29%20Position_%20Stop%20Anthropomorphizing%20Intermediate%20Tokens%20as%20Reasoning_Thinking%20Traces%21.pdf" target="_blank" rel="noopener">Kambhampati et al. (2026)</a> — <em>Stop Anthropomorphizing Intermediate Tokens as Reasoning/Thinking Traces!</em></li>
+            <li><a href="https://aclanthology.org/2020.acl-main.463/" target="_blank" rel="noopener">Bender and Koller (2020)</a> — <em>Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data</em>.</li>
+            <li><a href="https://dl.acm.org/doi/10.1145/3442188.3445922" target="_blank" rel="noopener">Bender et al. (2021)</a> — <em>On the Dangers of Stochastic Parrots</em>.</li>
+            <li><a href="https://doi.org/10.1016/j.tics.2023.10.011" target="_blank" rel="noopener">Mahowald et al. (2024)</a> — <em>Dissociating Language and Thought in Large Language Models</em>.</li>
+            <li><a href="https://nyaspubs.onlinelibrary.wiley.com/doi/10.1111/nyas.15125" target="_blank" rel="noopener">Kambhampati (2024)</a> — <em>Can Large Language Models Reason and Plan?</em></li>
+            <li><a href="https://arxiv.org/abs/2406.02061" target="_blank" rel="noopener">Nezhurina et al. (2024)</a> — <em>Alice in Wonderland</em>.</li>
+            <li><a href="https://arxiv.org/abs/2502.09192" target="_blank" rel="noopener">Ibrahim and Cheng (2025)</a> — <em>Thinking Beyond the Anthropomorphic Paradigm Benefits LLM Research</em>.</li>
+            <li><a href="https://arxiv.org/abs/2307.13702" target="_blank" rel="noopener">Lanham et al. (2023)</a> — <em>Measuring Faithfulness in Chain-of-Thought Reasoning</em>.</li>
+            <li><a href="https://transformer-circuits.pub/2023/monosemantic-features" target="_blank" rel="noopener">Bricken et al. (2023)</a> — <em>Towards Monosemanticity</em>.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>ANTHRO<span class="mirror-l">L</span>OGOS 2026</strong> · To Be or Not to Be Anthropomorphic: Mechanism vs. Illusion in AI
+  </footer>
+</body>
+</html>
